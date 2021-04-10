@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sqlite</string>
+    <string name="hintKey">Insert your key</string>
+    <string name="buttonValidate">Validate</string>
+    <string name="keyListing">List all keys</string>
+    <string name="autheticatedKeyList">List authenticated keys</string>
+</resources>
