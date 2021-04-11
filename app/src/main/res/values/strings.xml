@@ -4,4 +4,6 @@
     <string name="buttonValidate">Validate</string>
     <string name="keyListing">List all keys</string>
     <string name="autheticatedKeyList">List authenticated keys</string>
+    <string name="hintAuthentication">Insert password</string>
+    <string name="ButtonRegister">Register</string>
 </resources>

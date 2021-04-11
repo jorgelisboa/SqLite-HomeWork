@@ -20,9 +20,6 @@ public class SqLiteClass extends SQLiteOpenHelper {
             + "authentication VARCHAR(15) NOT NULL,"
             + "status VARCHAR(1) NOT NULL);";
 
-    //Inserting data in
-    private String setIn = "INSERT INTO acesso (_id, chave, authentication, status) VALUES('1','ABA9173','aus1729a8dans79','0');";
-
     //Constructor
     public SqLiteClass(@Nullable Context context, int version) {
         super(context, "DB_test", null, version);
@@ -35,8 +32,31 @@ public class SqLiteClass extends SQLiteOpenHelper {
     //Global Variables
     String passwordData;
     /*-----MY APP METHODS-----*/
-    //VERIFYING THE KEYS
+    //SIGNING UP
+    public boolean Signin (String chave, String authentication){
+        //Using SQLiteDatabase to initialize the "connection" with database
+        //getWritableDatabase selects the database app and opens the connection
+        SQLiteDatabase database = getWritableDatabase();
 
+        //Pass the values to the "insert"
+        ContentValues valores = new ContentValues();
+        valores.put("_id", (byte[]) null); //Column name, variable name
+        valores.put("chave", chave); //Column name, variable name
+        valores.put("authentication", authentication); //Column name, variable name
+        valores.put("status", "0"); //Column name, variable name
+
+
+        //Calling insert() to be verified by IF
+        if (database.insert("acesso",null, valores) != -1){
+            database.close();
+            return true;
+        }else{
+            database.close();
+            return false;
+        }
+    }
+
+    //VERIFYING THE KEYS
     public boolean hasAccess(String chave){
         SQLiteDatabase database = getWritableDatabase();
         Cursor cursor = database.rawQuery("SELECT chave FROM acesso", new String[]{ });
@@ -93,7 +113,6 @@ public class SqLiteClass extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);//Executes my DB
-        db.execSQL(setIn);
     }
     //Method that Upgrades my DB
     @Override
