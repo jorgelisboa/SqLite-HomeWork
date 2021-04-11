@@ -23,19 +23,19 @@ public class MainActivity2 extends AppCompatActivity {
         SqLiteClass sqLite = new SqLiteClass(MainActivity2.this, 1);//Where is my DB
 
         //My adapters
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sqLite.listAll());//Set the adapter on my "listAll"
+        //Adapters for all
+        ArrayAdapter<String> adapterAll = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sqLite.listAll());//Set the adapter on my "listAll"
+        //Adapters for authenticated
+        ArrayAdapter<String> adapterAuth = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sqLite.listAuth());//Set the adapter on my "listAll"
 
 
         //Buttons actions
-        btnListAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Fills the list
-                List.setAdapter(adapter);
-            }
+        btnListAll.setOnClickListener(v -> {
+            //Fills the list
+            List.setAdapter(adapterAll);
         });
 
-
+        btnListSome.setOnClickListener(v -> List.setAdapter(adapterAuth));
 
     }
 }

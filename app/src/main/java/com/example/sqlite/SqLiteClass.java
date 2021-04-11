@@ -119,7 +119,26 @@ public class SqLiteClass extends SQLiteOpenHelper {
         //Return
         return completeList;
     }
-    
 
+    //LISTING AUTHENTICATED
+    public List<String> listAuth() {
+        SQLiteDatabase db = getWritableDatabase(); //Open the connection
+        //Creating the string vector
+        List<String> authList = new ArrayList<String>();
+
+        //Using cursor to store select
+        Cursor c = db.rawQuery("SELECT * FROM acesso WHERE status = '1';", new String[]{ });
+        if(c.moveToFirst()){
+            do{
+                //Put the String in the ListView
+                String content = "Key: " + c.getString(1)+ "\nAuthentication: " + c.getString(2) + "\nStatus: "+c.getString(3);
+                //Add in the list
+                authList.add(content);
+            }while (c.moveToNext());
+        }
+        db.close();
+        //Return
+        return authList;
+    }
     }
 
