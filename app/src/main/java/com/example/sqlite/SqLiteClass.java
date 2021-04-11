@@ -31,6 +31,7 @@ public class SqLiteClass extends SQLiteOpenHelper {
     }
     //Global Variables
     String passwordData;
+    String status = "1";
     /*-----MY APP METHODS-----*/
     //SIGNING UP
     public boolean Signin (String chave, String authentication){
@@ -45,7 +46,6 @@ public class SqLiteClass extends SQLiteOpenHelper {
         valores.put("authentication", authentication); //Column name, variable name
         valores.put("status", "0"); //Column name, variable name
 
-
         //Calling insert() to be verified by IF
         if (database.insert("acesso",null, valores) != -1){
             database.close();
@@ -56,28 +56,6 @@ public class SqLiteClass extends SQLiteOpenHelper {
         }
     }
 
-    //VERIFYING THE KEYS
-    public boolean hasAccess(String chave){
-        SQLiteDatabase database = getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT chave FROM acesso", new String[]{ });
-
-        if(cursor.moveToFirst()){
-            //Recover password value
-            String passwordData = cursor.getString(0); //Column authentication from select
-
-            //Comparar DB data and the informed
-            if(passwordData.equals(chave)){
-                getWritableDatabase().close();
-                return true;
-            }else{
-                getWritableDatabase().close();
-                return false;
-            }
-        }else{
-            getWritableDatabase().close();
-            return false;
-        }
-    }
     //SHOWING AUTHENTICATION
     public boolean isAutenticated (String chave){
         SQLiteDatabase database = getWritableDatabase();
@@ -93,15 +71,16 @@ public class SqLiteClass extends SQLiteOpenHelper {
             return false;
         }
     }
-    //SETTING AUTHENTICATION
+
+    //SETTING STATUS TO "1"
     public boolean hasStatus(String chave){
         SQLiteDatabase database = getWritableDatabase(); //Connection
         ContentValues values = new ContentValues();
         //Indicates the column and the variable
-        values.put("status", "1");
+        values.put("status", status);
 
         //Calling the Update and the Verifying
-        if(database.update("acesso", values, "chave = ?", new String[]{chave}) != 0){
+        if(database.update("acesso", values, "chave = ?", new String[]{ chave }) != 0){
             database.close();
             return true;
         }else{
@@ -120,6 +99,7 @@ public class SqLiteClass extends SQLiteOpenHelper {
 
     }
 
+    //LISTING ALL
     public List<String> listAll() {
         SQLiteDatabase db = getWritableDatabase(); //Open the connection
         //Creating the string vector
@@ -139,5 +119,7 @@ public class SqLiteClass extends SQLiteOpenHelper {
         //Return
         return completeList;
     }
+    
+
     }
 

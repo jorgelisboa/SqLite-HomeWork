@@ -8,10 +8,36 @@
 
     <ListView
         android:id="@+id/List"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="342dp"
+        android:layout_height="396dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnListAll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
+
+    <Button
+        android:id="@+id/btnListAll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:layout_marginBottom="4dp"
+        android:text="@string/keyListing"
+        app:layout_constraintBottom_toTopOf="@+id/btnListSome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnListSome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:layout_marginBottom="84dp"
+        android:text="@string/listAuthenticated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

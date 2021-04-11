@@ -6,4 +6,6 @@
     <string name="autheticatedKeyList">List authenticated keys</string>
     <string name="hintAuthentication">Insert password</string>
     <string name="ButtonRegister">Register</string>
+    <string name="listAuthenticated">List Autheticated Keys</string>
+    <string name="listScreenButton">List screen</string>
 </resources>

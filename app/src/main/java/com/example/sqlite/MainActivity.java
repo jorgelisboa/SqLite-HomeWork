@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
         final EditText etUser = findViewById(R.id.etUser);
         final EditText etAuthentication = findViewById(R.id.etAuthentication);
         Button btnAccess = findViewById(R.id.btnValidate);
-        Button btnListAll = findViewById(R.id.btnListAll);
+        Button btnListScreen = findViewById(R.id.btnListScreen);
         Button btnRegister = findViewById(R.id.btnRegister);
+
         //Registering the user
         SqLiteClass db = new SqLiteClass(MainActivity.this, 1);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(db.Signin(etUser.getText().toString(), etAuthentication.getText().toString())){
                     Toast.makeText(MainActivity.this, "Registered", Toast.LENGTH_SHORT).show();
                     etUser.setText("");
@@ -36,20 +36,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         //Verifying the access
         btnAccess.setOnClickListener(v -> {
+            if(db.hasStatus(etUser.getText().toString())){
+                Toast.makeText(this, "Your status has changed to: "+ db.status, Toast.LENGTH_SHORT).show();
+            }
             if(db.isAutenticated(etUser.getText().toString())){
                 Toast.makeText(this, "Your key is: "+db.passwordData , Toast.LENGTH_SHORT).show();
-                //Should update the status to "1"
-                db.hasAccess(etUser.getText().toString());
-                return;
-            }
-            else{
+            }else{
                 Toast.makeText(MainActivity.this, "Key doesn't exist", Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnListAll.setOnClickListener(v -> {
+        //Goes to another screen (MainActivity2)
+        btnListScreen.setOnClickListener(v -> {
             Intent intent = new Intent( MainActivity.this, MainActivity2.class);
             startActivity(intent);
         });
